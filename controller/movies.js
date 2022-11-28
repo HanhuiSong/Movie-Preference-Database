@@ -1,12 +1,12 @@
 var moviesSchema = require('../models/movies'),
-    mongoose = require('mongoose');
+ mongoose = require('mongoose');
 
 
 const getMovies = async (req, res) => {
 
   try {
 
-    const task = await moviesSchema.find().limit(10);
+    const task = await mongoose.model().save();
 
     return res.status(200).json({ 'data': task });
 
