@@ -4,7 +4,7 @@ var Comment = require('./comment');
 
 // Define our user schema
 var MoviesSchema = new mongoose.Schema({
-    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
+    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment', default:""}],
     adult: Boolean,
     genre_ids: {type:[Number], default: []},
     original_language: String,
