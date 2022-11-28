@@ -1,8 +1,10 @@
+
 // Get the packages we need
 var express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
     secrets = require('./config/secrets'),
+    moviesRouter = require('./routes/movies.js'),
     bodyParser = require('body-parser');
 
 // Create our Express application
@@ -31,6 +33,8 @@ app.use(bodyParser.json());
 
 // Use routes as a module (see index.js)
 require('./routes')(app, router);
+
+app.use('/api/movies', moviesRouter);
 
 // Start the server
 app.listen(port);
