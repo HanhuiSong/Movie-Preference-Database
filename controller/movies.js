@@ -30,8 +30,22 @@ const postMovies = async (req, res) => {
         res.status(201).send(JSON.stringify({message: "OK", data: movies}));
     })
 }
+const searchMovies = async (req, res) => {
+    try {
+        const searchContent = req.params.content;
+        const regex = new RegExp(searchContent,'i');
+        const movies = await moviesSchema.find({$or:[
+                {title:{$regex:regex}},
+                {overview:{$regex:regex}}
+            ]});
+        res.status(200).json({'data': movies});
+    }catch (err){
+        res.status(500).json({'message': err.message});
+    }
+}
 
 module.exports = {
     getMovies,
-    postMovies
+    postMovies,
+    searchMovies
 }
