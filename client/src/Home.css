@@ -1,0 +1,9 @@
+.gallarymovies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.pageTitle {
+  color: rgb(183, 132, 68);
+}
+ 

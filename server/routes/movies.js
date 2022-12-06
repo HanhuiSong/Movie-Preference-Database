@@ -8,8 +8,8 @@ module.exports = function (router) {
   route.get(getMovies);
   route.post(postMovies);
 
-  var search = router.route('/movies/:content');
-  search.get(searchMovies);
+  var search = router.route('/movies/search');
+  //search.get(searchMovies);
   return router;
 }
 

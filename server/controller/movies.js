@@ -3,12 +3,11 @@ var moviesSchema = require('../models/movies'),
 
 
 const getMovies = async (req, res) => {
-
+    let limit = eval("(" + req.query.limit + ")");
     try {
 
-        const movies = await moviesSchema.find();
+        const movies = await moviesSchema.find().limit(limit);
         res.status(200).json({'data': movies});
-
     } catch (error) {
         res.status(500).json({'message': error.message});
     }
@@ -30,7 +29,7 @@ const postMovies = async (req, res) => {
         res.status(201).send(JSON.stringify({message: "OK", data: movies}));
     })
 }
-const searchMovies = async (req, res) => {
+/*const searchMovies = async (req, res) => {
     try {
         const searchContent = req.params.content;
         const regex = new RegExp(searchContent,'i');
@@ -42,10 +41,10 @@ const searchMovies = async (req, res) => {
     }catch (err){
         res.status(500).json({'message': err.message});
     }
-}
+}*/
 
 module.exports = {
     getMovies,
     postMovies,
-    searchMovies
+    //searchMovies
 }
