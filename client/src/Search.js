@@ -13,7 +13,7 @@ export default function GalleryView() {
     const [method, setMethod] = useState(0);
     const [order, setOrder] = useState(0);
     useEffect(() => {
-        axios.get('http://localhost:4000/api/movies?limit=2')
+        axios.get('http://localhost:4000/api/movies/'+name+'?limit=20')
             .then((response) => {
             setImageUrl(response.data);
             })
@@ -45,7 +45,7 @@ export default function GalleryView() {
 
     return (
         <div>
-            <input className='input' placeholder='Type a color' onChange={
+            <input className='input' placeholder='Type title or overview' onChange={
                 handleChange
             }/>
             <DropdownButton id="dropdown-basic-button" title={method===0?"Sorting by Title":"Sorting by Year"}>
@@ -62,7 +62,7 @@ export default function GalleryView() {
                         (species) => {
                             return <div>
                                 <div className="gallery1">
-                                    <a href={"/cs-409-mp2/#/detail/" + a.id}>
+                                    <a href={"/#/detail/" + species._id}>
                                         <div key={species.title}>{species.title}</div>
                                         <img id="pic"
                                              src={"https://image.tmdb.org/t/p/w300/"+species.poster_path}/>
