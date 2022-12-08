@@ -11,7 +11,8 @@ const GalleryItem = ({ id, poster, title, date, media_type, vote_average }) => {
   };
   return (
     <TransitionsModal media_type={media_type} id={id}>
-      <img className="poster" src={`${medium_size}/${poster}`} alt={title} />
+      <img className="poster" src={poster}/>
+      <div>{title}</div>
     </TransitionsModal>
   );
 };

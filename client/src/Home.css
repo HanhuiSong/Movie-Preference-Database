@@ -1,9 +1,33 @@
+
 .gallarymovies {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
+
 .pageTitle {
-  color: rgb(183, 132, 68);
+    color: rgb(187, 119, 30);
+    margin: 2%
 }
+
+/*Search*/
+.input {
+    width: 70%;
+    padding: 10px;
+    margin-left: 18%;
+    left:50%;
+
+}
+
+#dropdown-basic-button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: 40%;
+}
+#dropdown-basic-button1 {
+    text-align: center;
+    margin-left: 40%;
+}
+
  
