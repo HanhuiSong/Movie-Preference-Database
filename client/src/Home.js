@@ -15,7 +15,7 @@ const Home = () => {
   const fetchGallery = async () => {
     const { data } = await axios.get(
     //   `http://localhost:4000/api/movies?limit=20`
-      `https://api.themoviedb.org/3/discover/movie/?api_key=7f1b753fb62d68c35e35cf8905c6ec7c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&limit=20`
+      `https://api.themoviedb.org/3/discover/movie/?api_key=7f1b753fb62d68c35e35cf8905c6ec7c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false`
     );
     // console.log(data);
     setContent(data.results);
@@ -36,11 +36,11 @@ const Home = () => {
       </div> */}
 
       <div className="pageTitle">
-        Movies
+        In Theatre
       </div>
       <div className="gallarymovies">
-        {content.slice(0,10) &&
-          content.map((c) => (
+        {content &&
+          content.slice(12,18).map((c) => (
             <GalleryItem
               key={c.id}
               id={c.id}
@@ -53,11 +53,11 @@ const Home = () => {
           ))}
       </div>
       <div className="pageTitle">
-        TV
+        On Demand
       </div>
       <div className="gallarymovies">
         {content &&
-          content.map((c) => (
+          content.slice(0,12).map((c) => (
             <GalleryItem
               key={c.id}
               id={c.id}
