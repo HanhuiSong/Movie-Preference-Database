@@ -1,14 +1,15 @@
 .app {
-  min-height: 100vh;
-  background-color: rgb(164, 152, 15);
-  color: rgb(196, 128, 44);
-  padding-top: 5%;
-  font-family: Trebuchet MS;
-  justify-content: center;
-}
-
-.pageTitle {
-  display: flex;
-  justify-content: center;
-  font-size: larger;
-}
+    min-height: 100vh;
+    background-color: rgb(8, 8, 7);
+    color: rgb(87, 56, 18);
+    padding-top: 5%;
+    font-family: Trebuchet MS;
+    justify-content: center;
+  }
+  
+  .pageTitle {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+  }
+  

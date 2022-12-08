@@ -14,9 +14,10 @@ const Home = () => {
 
   const fetchGallery = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie/?api_key=7f1b753fb62d68c35e35cf8905c6ec7c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreURL}`
+    //   `http://localhost:4000/api/movies?limit=20`
+      `https://api.themoviedb.org/3/discover/movie/?api_key=7f1b753fb62d68c35e35cf8905c6ec7c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&limit=20`
     );
-    console.log(data);
+    // console.log(data);
     setContent(data.results);
   };
 
@@ -27,29 +28,40 @@ const Home = () => {
 
   return (
     <div>
-      <span className="pageTitle">
-        <Link to="/" className="linkStyle">
-          <pre> Filter </pre>
-        </Link>
+      <header/>
+      {/* <div className="pageTitle">
         <Link to="/search" className="linkStyle">
-          <pre> Search </pre>
+          <pre> Search Movies </pre>
         </Link>
-      </span>
+      </div> */}
 
-      <Genres
-        type="movie"
-        selectedGenres={selectedGenres}
-        setSelectedGenres={setSelectedGenres}
-        genres={genres}
-        setGenres={setGenres}
-      />
+      <div className="pageTitle">
+        Movies
+      </div>
+      <div className="gallarymovies">
+        {content.slice(0,10) &&
+          content.map((c) => (
+            <GalleryItem
+              key={c.id}
+              id={c.id}
+              poster={"https://image.tmdb.org/t/p/w300/"+c.poster_path}
+              title={c.title || c.name}
+              date={c.first_air_date || c.release_date}
+              media_type="movie"
+              vote_average={c.vote_average}
+            />
+          ))}
+      </div>
+      <div className="pageTitle">
+        TV
+      </div>
       <div className="gallarymovies">
         {content &&
           content.map((c) => (
             <GalleryItem
               key={c.id}
               id={c.id}
-              poster={c.poster_path}
+              poster={"https://image.tmdb.org/t/p/w300/"+c.poster_path}
               title={c.title || c.name}
               date={c.first_air_date || c.release_date}
               media_type="movie"
