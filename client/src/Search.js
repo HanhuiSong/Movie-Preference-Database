@@ -71,7 +71,7 @@ export default function GalleryView() {
             </div>
             <div className="gallarymovies">
                 {a.data &&
-                    a.data.slice(12, 20).map((c) => (
+                    a.data.slice(12, 18).map((c) => (
                         <GalleryItem
                             key={c.id}
                             id={c.id}

@@ -2,15 +2,15 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 import GalleryItem from "./components/Gallery/GalleryItem";
 import "./Home.css";
-import Genres from "./components/Genres";
-import useGenres from "./hooks/useGenres";
+// import Genres from "./components/Genres";
+// import useGenres from "./hooks/useGenres";
 import {Link} from "react-router-dom";
 
 const Home = () => {
     const [content, setContent] = useState([]);
-    const [selectedGenres, setSelectedGenres] = useState([]);
-    const [genres, setGenres] = useState([]);
-    const genreURL = useGenres(selectedGenres);
+    // const [selectedGenres, setSelectedGenres] = useState([]);
+    // const [genres, setGenres] = useState([]);
+    // const genreURL = useGenres(selectedGenres);
 
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const Home = () => {
             </div>
             <div className="gallarymovies">
                 {content.data &&
-                    content.data.slice(12, 18).map((c) => (
+                    content.data.slice(12, 24).map((c) => (
                         <GalleryItem
                             key={c.id}
                             id={c.id}
