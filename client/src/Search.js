@@ -74,7 +74,7 @@ export default function GalleryView() {
                     a.data.slice(12, 18).map((c) => (
                         <GalleryItem
                             key={c.id}
-                            id={c.id}
+                            id={c._id}
                             poster={"https://image.tmdb.org/t/p/w300/" + c.poster_path}
                             title={c.title || c.name}
                             date={c.first_air_date || c.release_date}
@@ -91,7 +91,7 @@ export default function GalleryView() {
                     a.data.slice(0, 12).map((c) => (
                         <GalleryItem
                             key={c.id}
-                            id={c.id}
+                            id={c._id}
                             poster={"https://image.tmdb.org/t/p/w300/" + c.poster_path}
                             title={c.title || c.name}
                             date={c.first_air_date || c.release_date}

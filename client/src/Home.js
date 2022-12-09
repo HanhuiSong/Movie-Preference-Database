@@ -35,7 +35,7 @@ const Home = () => {
                     content.data.slice(12, 24).map((c) => (
                         <GalleryItem
                             key={c.id}
-                            id={c.id}
+                            id={c._id}
                             poster={"https://image.tmdb.org/t/p/w300/" + c.poster_path}
                             title={c.title || c.name}
                             date={c.first_air_date || c.release_date}
@@ -52,7 +52,7 @@ const Home = () => {
                     content.data.slice(0, 12).map((c) => (
                         <GalleryItem
                             key={c.id}
-                            id={c.id}
+                            id={c._id}
                             poster={"https://image.tmdb.org/t/p/w300/" + c.poster_path}
                             title={c.title || c.name}
                             date={c.first_air_date || c.release_date}
