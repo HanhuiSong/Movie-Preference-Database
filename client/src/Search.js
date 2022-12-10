@@ -66,29 +66,13 @@ export default function GalleryView() {
                     setOrder(1)
                 }}>Descending</Dropdown.Item>
             </DropdownButton>
+            
             <div className="pageTitle">
-                In Theatre
+                Search result(s)
             </div>
             <div className="gallarymovies">
                 {a.data &&
-                    a.data.slice(12, 18).map((c) => (
-                        <GalleryItem
-                            key={c.id}
-                            id={c._id}
-                            poster={"https://image.tmdb.org/t/p/w300/" + c.poster_path}
-                            title={c.title || c.name}
-                            date={c.first_air_date || c.release_date}
-                            media_type="movie"
-                            vote_average={c.vote_average}
-                        />
-                    ))}
-            </div>
-            <div className="pageTitle">
-                On Demand
-            </div>
-            <div className="gallarymovies">
-                {a.data &&
-                    a.data.slice(0, 12).map((c) => (
+                    a.data.map((c) => (
                         <GalleryItem
                             key={c.id}
                             id={c._id}
