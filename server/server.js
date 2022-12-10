@@ -6,7 +6,7 @@ var express = require('express'),
     secrets = require('./config/secrets'),
     moviesRouter = require('./routes/movies.js'),
     cors = require('cors'),
-    authRouter = require('./routes/auth'),
+    authRouter = require('./routes/signin'),
     bodyParser = require('body-parser');
 
 // Create our Express application
@@ -39,8 +39,11 @@ app.use(bodyParser.json());
 require('./routes')(app, router);
 
 app.use('/api/movies', moviesRouter);
-app.use('/api', authRouter);
+// app.use('/api/auth', authRouter);
 
 // Start the server
 app.listen(port);
 console.log(`Server running on http://localhost:${port}`);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);

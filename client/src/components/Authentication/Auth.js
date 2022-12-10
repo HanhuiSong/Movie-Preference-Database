@@ -9,7 +9,7 @@ import { AUTH } from '../../constants/actionsTypes';
 import useStyles from './styles';
 import Input from './Inputs';
 
-const initialState = { userName: '', password: '', confirmPassword: '' };
+const initialState = { username: '', password: '', confirmPassword: '' };
 
 const SignUp = () => {
   const [form, setForm] = useState(initialState);
@@ -65,7 +65,7 @@ const SignUp = () => {
           <Grid container spacing={2}>
             { isSignup && (
             <>
-              <Input name="userName" label="userName" handleChange={handleChange} autoFocus full />
+              <Input name="username" label="username" handleChange={handleChange} autoFocus full />
             </>
             )}
             <Input name="email" label="Email Address" handleChange={handleChange} type="email" />

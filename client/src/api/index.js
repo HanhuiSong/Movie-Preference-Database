@@ -9,5 +9,5 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const signIn = (formData) => API.post('/api/auth/signin', formData);
-export const signUp = (formData) => API.post('/api/auth/signup', formData);
+export const signIn = (formData) => API.post('/api/signin', formData);
+export const signUp = (formData) => API.post('/api/signup', formData);
