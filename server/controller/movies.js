@@ -3,12 +3,11 @@ var moviesSchema = require('../models/movies'),
 
 
 const getMovies = async (req, res) => {
-
+    let limit = eval("(" + req.query.limit + ")");
     try {
 
-        const movies = await moviesSchema.find();
+        const movies = await moviesSchema.find().limit(limit);
         res.status(200).json({'data': movies});
-
     } catch (error) {
         res.status(500).json({'message': error.message});
     }
@@ -32,12 +31,10 @@ const postMovies = async (req, res) => {
 }
 const searchMovies = async (req, res) => {
     try {
+        let limit = eval("(" + req.query.limit + ")");
         const searchContent = req.params.content;
         const regex = new RegExp(searchContent,'i');
-        const movies = await moviesSchema.find({$or:[
-                {title:{$regex:regex}},
-                {overview:{$regex:regex}}
-            ]});
+        const movies = await moviesSchema.find({title:{$regex:regex}}).limit(limit);
         res.status(200).json({'data': movies});
     }catch (err){
         res.status(500).json({'message': err.message});
