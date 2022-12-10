@@ -6,6 +6,13 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionsTypes';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
+import * as actionType from '../../constants/actionsTypes';
 
 const Header = () => {
 
@@ -59,4 +66,3 @@ const Header = () => {
 };
 
 export default Header;
-
