@@ -1,9 +1,10 @@
 import {Component} from "react";
 import './styles.css';
+import Carousel from "./Carousel";
 // import axios from "axios";
 // import {Link, useSearchParams} from "react-router-dom";
 
-// const [searchParams] = useSearchParams();
+// const [searchParams, setSearchParams] = useSearchParams();
 // const username = searchParams.get("username");
 
 // let user;
@@ -46,7 +47,7 @@ const getPosterURL = (posterPath) => {
     return `https://www.themoviedb.org/t/p/w220_and_h330_face${posterPath}`
 }
 
-const numbers = Array.from(Array(100).keys())
+const numbers = Array.from(Array(10).keys())
 
 class User extends Component {
     constructor(props) {
@@ -77,9 +78,13 @@ class User extends Component {
                         {/*        </Link>*/}
                         {/*    </div>*/}
                         {/*))}*/}
-                        {numbers.map((number) => (
-                            <img className="User-poster" src={getPosterURL("/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg")} alt="poster"/>
-                        ))}
+                        <Carousel show={8}>
+                            {numbers.map((number) => (
+                                <div className="User-poster-wrapper">
+                                    <img className="User-poster" src={getPosterURL("/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg")} alt="poster"/>
+                                </div>
+                            ))}
+                        </Carousel>
                     </div>
                 </div>
                 <div className="User-reviews">
