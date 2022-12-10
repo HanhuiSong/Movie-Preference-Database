@@ -4,7 +4,6 @@ import GalleryItem from "./components/Gallery/GalleryItem";
 import "./Home.css";
 // import Genres from "./components/Genres";
 // import useGenres from "./hooks/useGenres";
-import {Link} from "react-router-dom";
 
 const Home = () => {
     const [content, setContent] = useState([]);
