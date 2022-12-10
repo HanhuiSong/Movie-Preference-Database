@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Define our user schema
 const ReviewSchema = new mongoose.Schema({
     userID: {type: String, default: ""},
-    username: {type: String, default: "unassigned"},
+    userName: {type: String, default: "unassigned"},
     movieID: {type: String, default: ""},
     content: String,
     title: String,
