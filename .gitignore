@@ -3,7 +3,7 @@
 .idea/*
 .vs_code/
 .vs_code/*
-node_modules
+server/node_modules
 node_modules/*
 public/
 public/*

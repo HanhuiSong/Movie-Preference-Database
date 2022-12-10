@@ -1,10 +1,10 @@
 // Load required packages
 var mongoose = require('mongoose');
-var Comment = require('./comment');
+var Review = require('./review');
 
 // Define our user schema
 var MoviesSchema = new mongoose.Schema({
-    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment', default:""}],
+    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review', default:""}],
     adult: Boolean,
     genre_ids: {type:[Number], default: []},
     original_language: String,

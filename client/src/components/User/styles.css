@@ -1,0 +1,19 @@
+.User {
+  padding: 1rem;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.User-movies {
+  display: flex;
+  overflow: auto;
+}
+
+.User-poster {
+  width: 110px;
+  height: 165px;
+  margin: 0 0.5em;
+}

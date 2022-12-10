@@ -1,16 +1,14 @@
 // Load required packages
-var mongoose = require('mongoose');
-var PlayList = require('./playList');
+const mongoose = require('mongoose');
 
 // Define our user schema
-var UserSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-    firstName: String,
-    lastName: String,
-    watchList: [{type: mongoose.Schema.Types.ObjectId, ref: 'PlayList'}],
-    // comment: [{ type: Schema.Types.ObjectId, ref: 'Comments'}]
+const UserSchema = new mongoose.Schema({
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    playList: [String],
+    reviews: [String]
 });
 
 // Export the Mongoose model
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
