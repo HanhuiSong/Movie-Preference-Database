@@ -43,9 +43,11 @@ export default function GalleryView() {
         }
     } else if (a.data !== undefined && method === 1) {
         if (order === 0) {
-            a.data.sort((c, d) => c.release_date.slice(0, 4) - d.release_date.split(0, 4));
+            a.data.sort((c, d) => c.release_date.slice(0,4) - d.release_date.slice(0,4));
+            console.log(a);
         } else {
-            a.data.sort((c, d) => d.release_date.split(0, 4) - c.release_date.split(0, 4));
+            a.data.sort((c, d) => d.release_date.slice(0,4)  - c.release_date.slice(0,4));
+            console.log(a);
         }
     }
 
