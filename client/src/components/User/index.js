@@ -17,7 +17,7 @@ function User() {
 
     const getUser = async () => {
         try {
-            await axios.get(`http://localhost:4000/api/users?where={"username": "${username}"}`)
+            await axios.get(`https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`)
                 .then((response) => {
                 const obj = response.data.data[0];
                 setUser(obj);
@@ -25,7 +25,7 @@ function User() {
             })
                 .then(() => {
                     for (let movieId of watchlist) {
-                        axios.get(`http://localhost:4000/api/detail/${movieId}`)
+                        axios.get(`https://glacial-journey-32972.herokuapp.com/api/detail/${movieId}`)
                             .then((response) => {
                                 setMovies(current => [...current, response.data.data[0]]);
                             })
@@ -59,11 +59,11 @@ function User() {
                 <div className="User-movies">
                     <Carousel show={8}>
                         {movies.map((movie) => (
-                            <Link to={"/detail/" + movie._id}>
-                                <div className="User-poster-wrapper" key={movie.title}>
+                            <div className="User-poster-wrapper" key={movie.title}>
+                                <Link to={"/detail/" + movie._id}>
                                     <img className="User-poster" src={getPosterURL(movie.poster_path)} alt="poster"/>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         ))}
                     </Carousel>
                 </div>

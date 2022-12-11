@@ -11,7 +11,7 @@ const GalleryItem = ({id, poster, title, date, media_type, vote_average}) => {
     };
     return (
         <div>
-            <a href={"/#/detail/" + id}>
+            <a href={"/detail/" + id}>
                 <img className="poster" src={poster} size={small_size} alt={title}/>
             </a>
             <div>{title}</div>

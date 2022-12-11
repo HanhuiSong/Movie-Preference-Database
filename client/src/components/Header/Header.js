@@ -42,7 +42,7 @@ const Header = () => {
                         <Link to={"/"}>Home</Link>
                     </Typography>
 
-                    <Button href={"/#/search"}>Search</Button>
+                    <Button href={"/search"}>Search</Button>
                     {user?.result ? (
                         <div className='profile'>
                             <Link to={"/user/" + user?.result.username}>
