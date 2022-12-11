@@ -13,16 +13,20 @@ export default function GalleryView() {
     const [name, setName] = useState("");
     const [method, setMethod] = useState(0);
     const [order, setOrder] = useState(0);
+    console.log(name);
+    async function getSearchResults(){
+        await axios.get('http://localhost:4000/api/movies/' + name + '?limit=20')
+        .then((response) => {
+            setImageUrl(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+            setImageUrl([]);
+        })
+    }
     useEffect(() => {
-        axios.get('http://localhost:4000/api/movies/' + name + '?limit=20')
-            .then((response) => {
-                setImageUrl(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-                setImageUrl([]);
-            })
-    }, [name, imagesUrl]);
+        getSearchResults();
+    }, [name]);
 
 
     function handleChange(event) {
