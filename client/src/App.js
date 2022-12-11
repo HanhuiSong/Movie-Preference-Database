@@ -24,7 +24,7 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path="/detail/:id" component={Detail} />
               <Route path="/search" component={Search} />
-              <Route path="/user" component={User} />
+              <Route path="/user/:username" component={User} />
               <Route path="/auth" exact component={() => (!savedUser ? <Auth /> : <Redirect to='/' />)} />
             </Switch>
           </Container>

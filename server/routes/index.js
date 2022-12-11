@@ -1,9 +1,6 @@
 /*
  * Connect all of your endpoints together here.
  */
-var { getMovies } = require('./movies');
-
-
 module.exports = function (app, router) {
     app.use('/api', require('./home.js')(router));
     app.use('/api/movies', require('./movies.js')(router));
@@ -12,5 +9,4 @@ module.exports = function (app, router) {
     app.use('/api/reletive', require('./reletive.js')(router));
     app.use('/api/signin', require('./signin')(router));
     app.use('/api/signup', require('./signup')(router));
-    app.use('/api/reviews', require('./review')(router));
 };

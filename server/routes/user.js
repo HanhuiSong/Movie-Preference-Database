@@ -1,6 +1,4 @@
 const User = require('../models/user');
-const Review = require('../models/review');
-const mongoose = require('mongoose');
 
 module.exports = function(router) {
     const userRoute = router.route('/users');
@@ -31,18 +29,6 @@ module.exports = function(router) {
         const user = new User(req.body);
         try {
             const data = await user.save();
-            if (data.reviews.length !== 0) {
-                const reviewIds = data.reviews;
-                const update = {
-                    username: data.username,
-                    userID: data._id
-                }
-                for (let review of reviewIds) {
-                    const reviewId = mongoose.Types.ObjectId(review);
-                    const filter = {_id: reviewId};
-                    await Review.findOneAndUpdate(filter, update);
-                }
-            }
             res.status(201).json({message: "User created!", "data": data});
         } catch (error) {
             if (error.code === 11000) {
@@ -80,19 +66,6 @@ module.exports = function(router) {
                 id, update, {new: true}
             );
 
-            if (user.reviews.length !== 0) {
-                const reviewIds = user.reviews;
-                const update = {
-                    username: user.username,
-                    userID: user._id
-                }
-                for (let review of reviewIds) {
-                    const reviewId = mongoose.Types.ObjectId(review);
-                    const filter = {_id: reviewId};
-                    await Review.findOneAndUpdate(filter, update);
-                }
-            }
-
             if (user === null) {
                 res.status(404).json({message: "User not found!"});
             } else {
@@ -111,12 +84,6 @@ module.exports = function(router) {
         try {
             const id = req.params.id;
             const user = await User.findByIdAndDelete(id);
-            const reviewIds = user.reviews;
-            for (let review of reviewIds) {
-                const reviewId = mongoose.Types.ObjectId(review);
-                const filter = {_id: reviewId};
-                await Review.findOneAndDelete(filter)
-            }
             res.status(200).json({message: `User '${user.username}' has been deleted.`});
         } catch (error) {
             res.status(404).json({message: "User not found!"});

@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 const GalleryItem = ({id, poster, title, date, media_type, vote_average}) => {
     GalleryItem.propTypes = {
-        id: PropTypes.number,
+        id: PropTypes.string,
         title: PropTypes.string,
         media_type: PropTypes.string,
-        vote_average: PropTypes.string,
+        vote_average: PropTypes.number,
     };
     return (
         <div>

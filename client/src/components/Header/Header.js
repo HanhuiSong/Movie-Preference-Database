@@ -1,14 +1,14 @@
 import "./Header.css";
 import React, { useState, useEffect } from 'react';
-import { AppBar, Box, Toolbar, Typography, Button, IconButton, Avatar } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Box, Toolbar, Typography, Button, Avatar } from '@mui/material';
+// import { IconButton } from '@mui/material';
+// import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionsTypes';
 
 const Header = () => {
-
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const location = useLocation();
@@ -45,14 +45,17 @@ const Header = () => {
                     <Button href={"/#/search"}>Search</Button>
                     {user?.result ? (
                         <div className='profile'>
-                            <Avatar className='purple' alt={user?.result.username} src={user?.result.imageUrl}>{user?.result.username.charAt(0)}</Avatar>
+                            <Link to={"/user/" + user?.result.username}>
+                                <Avatar className='purple' alt={user?.result.username} src={user?.result.imageUrl}>
+                                    {Array.from(user?.result.username)[0].toUpperCase()}
+                                </Avatar>
+                            </Link>
                             <Typography className='username' variant="h6">{user?.result.name}</Typography>
                             <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
                         </div>
                     ) : (
                         <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
                     )}
-
                 </Toolbar>
             </AppBar>
         </Box>

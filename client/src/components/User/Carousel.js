@@ -2,54 +2,54 @@ import {useEffect, useState} from 'react'
 import './carousel.css'
 
 const Carousel = (props) => {
-    const {children, show} = props
+    const {children, show} = props;
 
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [length, setLength] = useState(children.length)
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [length, setLength] = useState(children.length);
 
-    const [touchPosition, setTouchPosition] = useState(null)
+    const [touchPosition, setTouchPosition] = useState(null);
 
     useEffect(() => {
         setLength(children.length)
-    }, [children])
+    }, [children]);
 
     const next = () => {
         if (currentIndex < (length - show)) {
             setCurrentIndex(prevState => prevState + 1)
         }
-    }
+    };
 
     const prev = () => {
         if (currentIndex > 0) {
             setCurrentIndex(prevState => prevState - 1)
         }
-    }
+    };
 
     const handleTouchStart = (e) => {
-        const touchDown = e.touches[0].clientX
+        const touchDown = e.touches[0].clientX;
         setTouchPosition(touchDown)
-    }
+    };
 
     const handleTouchMove = (e) => {
-        const touchDown = touchPosition
+        const touchDown = touchPosition;
 
         if (touchDown === null) {
-            return
+            return;
         }
 
-        const currentTouch = e.touches[0].clientX
+        const currentTouch = e.touches[0].clientX;
         const diff = touchDown - currentTouch
 
         if (diff > 5) {
-            next()
+            next();
         }
 
         if (diff < -5) {
-            prev()
+            prev();
         }
 
-        setTouchPosition(null)
-    }
+        setTouchPosition(null);
+    };
 
     return (
         <div className="carousel-container">
@@ -75,7 +75,7 @@ const Carousel = (props) => {
                 }
             </div>
         </div>
-    )
+    );
 }
 
 export default Carousel;
