@@ -3,9 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import {GoogleLogin} from '@react-oauth/google';
 import { signin, signup } from '../../actions/auth';
-import { AUTH } from '../../constants/actionsTypes';
 import useStyles from './styles';
 import Input from './Inputs';
 
