@@ -40,9 +40,31 @@ const searchMovies = async (req, res) => {
         res.status(500).json({'message': err.message});
     }
 }
+const getMovieById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const movie = await moviesSchema.find({_id: id});
+        res.status(200).json({'data': movie});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({'message': err.message});
+    }
+}
+const getMovieByGenre = async (req, res) => {
+    try {
+        const genreId = req.params.id;
+        console.log(req.params);
+        const movie = await moviesSchema.find({genre_ids:{$eq:genreId}}).limit(6);
+        res.status(200).json({'data': movie})
+    } catch (err) {
+        res.status(500).json({'message': err.message});
+    }
 
+}
 module.exports = {
     getMovies,
     postMovies,
-    searchMovies
+    searchMovies,
+    getMovieById,
+    getMovieByGenre
 }

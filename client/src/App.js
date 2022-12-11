@@ -8,6 +8,7 @@ import User from "./components/User/index";
 import { HashRouter as Router } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Auth from './components/Authentication/Auth';
+import Detail from "./components/Detail";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Container>
             <Switch>
               <Route path="/" component={Home} exact />
+              <Route path="/detail/:id" component={Detail} />
               <Route path="/search" component={Search} />
               <Route path="/user" component={User} />
               <Route path="/auth" exact component={() => (!savedUser ? <Auth /> : <Redirect to='/' />)} />
