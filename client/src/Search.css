@@ -1,0 +1,30 @@
+.pageTitle {
+    color: aqua;
+  }
+  .searchmovies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(43, 81, 39);
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .searchbar {
+    display: flex;
+    justify-content: center;
+  }
+  .field {
+    justify-content: center;
+  }
+  
+  .linkStyle {
+    float: right;
+    background-color: rgb(114, 22, 22);
+    color: white;
+    /* padding: 1em 1.5em; */
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 2em;
+  }
+  
