@@ -56,6 +56,7 @@ export default function GalleryView() {
             <input className='input' placeholder='Search By Title' onChange={
                 handleChange
             }/>
+            <div className='buttons'>
             <DropdownButton id="dropdown-basic-button" title={method === 0 ? "Sorting by Title" : "Sorting by Year"}>
                 <Dropdown.Item onClick={() => {
                     setMethod(0)
@@ -72,7 +73,7 @@ export default function GalleryView() {
                     setOrder(1)
                 }}>Descending</Dropdown.Item>
             </DropdownButton>
-            
+            </div>
             <div className="pageTitle">
                 Search result(s)
             </div>
