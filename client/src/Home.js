@@ -21,7 +21,8 @@ const Home = () => {
                 console.log(error);
                 setContent([]);
             })
-    }, [content]);
+    }, []);
+    // }, [content]);
 
     return (
         <div>

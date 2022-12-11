@@ -45,8 +45,10 @@ const Header = () => {
                     <Button href={"/#/search"}>Search</Button>
                     {user?.result ? (
                         <div className='profile'>
-                            <Avatar className='purple' alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
-                            <Typography className='userName' variant="h6">{user?.result.name}</Typography>
+                            {console.log(user)}
+                            {console.log('')}
+                            <Avatar className='purple' alt={user?.result.username} src={user?.result.imageUrl}>{user?.result.username.charAt(0)}</Avatar>
+                            <Typography className='username' variant="h6">{user?.result.name}</Typography>
                             <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
                         </div>
                     ) : (

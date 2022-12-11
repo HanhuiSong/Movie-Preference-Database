@@ -1,6 +1,6 @@
 .User {
   padding: 1rem;
-  width: 75%;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -8,12 +8,17 @@
 }
 
 .User-movies {
-  display: flex;
-  overflow: auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .User-poster {
   width: 110px;
   height: 165px;
   margin: 0 0.5em;
+}
+
+.User-poster-wrapper {
+  padding: 8px;
 }

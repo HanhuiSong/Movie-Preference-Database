@@ -34,10 +34,7 @@ const searchMovies = async (req, res) => {
         let limit = eval("(" + req.query.limit + ")");
         const searchContent = req.params.content;
         const regex = new RegExp(searchContent,'i');
-        const movies = await moviesSchema.find({$or:[
-                {title:{$regex:regex}},
-                {overview:{$regex:regex}}
-            ]}).limit(limit);
+        const movies = await moviesSchema.find({title:{$regex:regex}}).limit(limit);
         res.status(200).json({'data': movies});
     }catch (err){
         res.status(500).json({'message': err.message});
