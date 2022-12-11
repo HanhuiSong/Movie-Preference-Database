@@ -25,4 +25,9 @@
 
 .User-playlist {
   margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.User-delete {
+  width: 300px;
 }

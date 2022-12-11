@@ -22,7 +22,8 @@ const Header = () => {
         const token = user?.token;
         if (token) {
             const decodedToken = decode(token);
-            if (decodedToken.exp * 600 < new Date().getTime())logout();
+
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
         setUser(JSON.parse(localStorage.getItem('profile')));
         // eslint-disable-next-line
@@ -30,11 +31,11 @@ const Header = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="default" style={{ background: '#D3DA9A' }}>
+            <AppBar position="static" color="default" style={{ background: '#202020' }}>
                 <Toolbar>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to={"/"}>Home</Link>
+                        <Link to={"/"}>Interactive Movie DB</Link>
                     </Typography>
 
                     <Button href={"/search"}>Search</Button>
@@ -47,10 +48,10 @@ const Header = () => {
                                 </Avatar>
                             </Link>
                             <Typography className='username' variant="h6">{user?.result.name}</Typography>
-                            <Button variant="contained" color="primary" onClick={logout}>Logout</Button>
+                            <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
                         </div>
                     ) : (
-                        <Button variant="contained" color="primary" href={"/auth"}>Log In</Button>
+                        <Button variant="contained" color="secondary" href={"/auth"}>Log In</Button>
                     )}
                 </Toolbar>
             </AppBar>
