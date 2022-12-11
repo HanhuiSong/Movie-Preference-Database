@@ -34,7 +34,7 @@ const Header = () => {
             <AppBar position="static" color="primary" style={{ background: '#202020' }}>
                 <Toolbar>
 
-                    <Typography variant="h6" align = "center" component="div" sx={{ flexGrow: 1}}>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
                         <Button href={"/"}>Interactive Movie DB</Button>
                     </Typography>
 
