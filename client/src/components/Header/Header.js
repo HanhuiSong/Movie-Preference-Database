@@ -31,11 +31,11 @@ const Header = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="default" style={{ background: '#202020' }}>
+            <AppBar position="static" color="primary" style={{ background: '#202020' }}>
                 <Toolbar>
 
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to={"/"}>Interactive Movie DB</Link>
+                    <Typography variant="h6" align = "center" component="div" sx={{ flexGrow: 1}}>
+                        <Button href={"/"}>Interactive Movie DB</Button>
                     </Typography>
 
                     <Button href={"/search"}>Search</Button>
