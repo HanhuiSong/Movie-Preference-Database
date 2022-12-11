@@ -9,10 +9,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 const axios = require('axios');
 
-const GET_DETAIL_API = "http://127.0.0.1:4000/api/detail/";
-const GET_RELETIVE_API = "http://127.0.0.1:4000/api/reletive/";
+const GET_DETAIL_API = "https://glacial-journey-32972.herokuapp.com/api/detail/";
+const GET_RELETIVE_API = "https://glacial-journey-32972.herokuapp.com/api/reletive/";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
-
+const savedUser = JSON.parse(localStorage.getItem('profile'));
+const username = savedUser.result.username;
+const USER_INFO_API = `https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`
+const USER_UPDATE_API = "https://glacial-journey-32972.herokuapp.com/api/users/"
+// savedUser.result._id
+// 
 const generalMap = new Map([
     [28, "Action"],
     [12, "Adventure"],
@@ -52,7 +57,7 @@ export default function Detail() {
     const [isLoaded, setIsLoaded] = React.useState(true);
     const [reletiveMovies, setReletiveMovies] = React.useState({});
     const movieId = document.URL.split('/').pop();
-    const singleMovieUrl = GET_DETAIL_API + movieId
+    const singleMovieUrl = GET_DETAIL_API + movieId;
 
     async function getMovieDetailAPT() {
         await axios.get(singleMovieUrl).then((Response) => {            
