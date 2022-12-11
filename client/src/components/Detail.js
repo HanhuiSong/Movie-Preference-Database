@@ -10,14 +10,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 const axios = require('axios');
 
-const GET_DETAIL_API = "https://glacial-journey-32972.herokuapp.com/api/detail/";
-const GET_RELETIVE_API = "https://glacial-journey-32972.herokuapp.com/api/reletive/";
+const GET_DETAIL_API = "https://intense-bastion-25012.herokuapp.com/api/detail/";
+const GET_RELETIVE_API = "https://intense-bastion-25012.herokuapp.com/api/reletive/";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 const savedUser = JSON.parse(localStorage.getItem('profile'));
 const username = savedUser === null ? null : savedUser.result.username;
 // const username = "jonwick"
-const USER_INFO_API = `https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`
-const USER_UPDATE_API = "https://glacial-journey-32972.herokuapp.com/api/users/"
+const USER_INFO_API = `https://intense-bastion-25012.herokuapp.com/api/users?where={"username": "${username}"}`
+const USER_UPDATE_API = "https://intense-bastion-25012.herokuapp.com/api/users/"
 
 let favorited = false;
 const generalMap = new Map([

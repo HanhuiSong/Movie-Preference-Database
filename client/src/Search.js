@@ -15,7 +15,7 @@ export default function GalleryView() {
     const [order, setOrder] = useState(0);
     console.log(name);
     async function getSearchResults(){
-        await axios.get('http://localhost:4000/api/movies/' + name + '?limit=20')
+        await axios.get('https://intense-bastion-25012.herokuapp.com/api/movies/' + name + '?limit=20')
         .then((response) => {
             setImageUrl(response.data);
         })

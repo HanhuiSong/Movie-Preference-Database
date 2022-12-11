@@ -43,7 +43,7 @@ app.use('/api/movies', moviesRouter);
 
 // Start the server
 app.listen(port);
-console.log(`Server running on http://localhost:${port}`);
+console.log(`Server running on https://intense-bastion-25012.herokuapp.com`);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);

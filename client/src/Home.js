@@ -13,7 +13,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        axios.get('https://glacial-journey-32972.herokuapp.com/api/movies?limit=20')
+        axios.get('https://intense-bastion-25012.herokuapp.com/api/movies?limit=20')
             .then((response) => {
                 setContent(response.data);
             })

@@ -17,7 +17,7 @@ function User() {
 
     const getUser = async () => {
         try {
-            await axios.get(`https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`)
+            await axios.get(`https://intense-bastion-25012.herokuapp.com/api/users?where={"username": "${username}"}`)
                 .then((response) => {
                 const obj = response.data.data[0];
                 setUser(obj);
@@ -25,7 +25,7 @@ function User() {
             })
                 .then(() => {
                     for (let movieId of watchlist) {
-                        axios.get(`https://glacial-journey-32972.herokuapp.com/api/detail/${movieId}`)
+                        axios.get(`https://intense-bastion-25012.herokuapp.com/api/detail/${movieId}`)
                             .then((response) => {
                                 setMovies(current => [...current, response.data.data[0]]);
                             })
