@@ -5,6 +5,8 @@ import Rating from '@mui/material/Rating';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import { useEffect } from 'react';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
 const axios = require('axios');
 
 const GET_DETAIL_API = "http://127.0.0.1:4000/api/detail/";
@@ -50,26 +52,23 @@ export default function Detail() {
     const [isLoaded, setIsLoaded] = React.useState(true);
     const [reletiveMovies, setReletiveMovies] = React.useState({});
     const movieId = document.URL.split('/').pop();
-    
+    const singleMovieUrl = GET_DETAIL_API + movieId
 
-    function getMovieDetailAPT() {
-        axios.get(GET_DETAIL_API + movieId).then((Response) => {            
+    async function getMovieDetailAPT() {
+        await axios.get(singleMovieUrl).then((Response) => {            
             const obj = Response.data.data;
             for (const key in obj) {
                 if (obj.hasOwnProperty(key)) {
                     try {
-                        // console.log("getMovieDetailAPT: ");
                         const element = obj[key];
-                        setMovie(element);
-                        setIsLoaded(false);
                         const map1 = new Map(
                             [...generalMap]
-                                .filter(([k, v]) => movie.genre_ids.includes(k)
+                                .filter(([k, v]) => element.genre_ids.includes(k)
                                 ));
                         myGenre =  Array.from(map1.values());
-                        reletiveGenreId = movie.genre_ids[0];
-                        // console.log("reletiveGenreId: " + reletiveGenreId);
-                        
+                        reletiveGenreId = element.genre_ids[0];
+                        setMovie(element);
+                        setIsLoaded(false); 
                     } catch (error) {
                         console.log(error);
                     }
@@ -77,36 +76,27 @@ export default function Detail() {
                     console.log("no key");
                 }
             }
-        }).then(res2 => {
-            getReletiveAPT();
-        });
-    }
-
-    function getReletiveAPT() {
-        axios.get(GET_RELETIVE_API + reletiveGenreId).then((Response) => {
-            try {
-                const obj = Response.data.data;
-                setReletiveMovies(obj);
-                console.log("getReletiveAPT: " + obj);
-            } catch (error) {
-                console.log(error);
-            }
-
+            return axios.get(GET_RELETIVE_API + reletiveGenreId)
+        }).then(Response => {
+            const obj = Response.data.data;
+            setReletiveMovies(obj);
         });
     }
 
     useEffect(() => {
-        getMovieDetailAPT();
-        
-    }, [movieId, reletiveGenreId, movie.genre_ids  ]);
+        let isMounted = true;  
+        let flag = true;    // add flag
+        getMovieDetailAPT().then(data => {
+            if (isMounted) flag = false;    // add conditional check
+          })
+        return () => { isMounted = false };
+    }, [singleMovieUrl, reletiveGenreId]);
 
-    
     if (isLoaded) {
         return <div>Loading...</div>;
     }
 
-    // console.log("reletiveMovies: " + reletiveMovies);
-    
+
 
     return (
         <div>
@@ -143,8 +133,13 @@ export default function Detail() {
                 </Divider>
                 <Grid item xs={4} container direction="column" justifyContent="center" sx={{ height: 330 }}>
                     <div>
-                        <p>Rating: </p>
+                        <p>Rating: {movie.vote_average}</p>
                         <Rating name="read-only" value={Number(movie.vote_average)} precision={0.5} max={10} readOnly />
+                        <p>Favorite: 
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+                            <FavoriteBorderIcon></FavoriteBorderIcon>
+                        </IconButton>
+                        </p>
                     </div>
                 </Grid>
             </Grid>
@@ -170,7 +165,7 @@ export default function Detail() {
                             <Grid item>
                                 <ButtonBase sx={{ width: 100, height: 230 }}>
                                 <a href={"/#/detail/" + movie._id}>
-                                    <Img alt="complex" src={IMG_API + movie.poster_path} />
+                                    <Img alt="complex" src={IMG_API + movie.poster_path} key={movie.id}/>
                                     </a>
                                 </ButtonBase>
                             </Grid>
