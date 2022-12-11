@@ -8,7 +8,6 @@ module.exports = function (router) {
   console.log('ran auth.js line 8');
   console.log('');
 
-   // api/auth/signin
   const signInRoute = router.route('/signin');
 
   console.log('ran auth.js line 15');
@@ -30,7 +29,7 @@ module.exports = function (router) {
       res.status(200).json({ result: oldUser, token });
     } catch (err) {
       console.log('user.js ;line 24' + err);
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json({ 'message': "Something went wrong", 'error': err });
     }
   });
 

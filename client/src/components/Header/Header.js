@@ -45,8 +45,6 @@ const Header = () => {
                     <Button href={"/#/search"}>Search</Button>
                     {user?.result ? (
                         <div className='profile'>
-                            {console.log(user)}
-                            {console.log('')}
                             <Avatar className='purple' alt={user?.result.username} src={user?.result.imageUrl}>{user?.result.username.charAt(0)}</Avatar>
                             <Typography className='username' variant="h6">{user?.result.name}</Typography>
                             <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
@@ -54,6 +52,7 @@ const Header = () => {
                     ) : (
                         <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
                     )}
+
                 </Toolbar>
             </AppBar>
         </Box>

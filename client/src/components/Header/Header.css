@@ -12,4 +12,23 @@
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-} 
+}
+
+.profile {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logout {
+  margin-left: '20px';
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+
