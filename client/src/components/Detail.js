@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import { useEffect } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 const axios = require('axios');
 
@@ -13,7 +14,8 @@ const GET_DETAIL_API = "https://glacial-journey-32972.herokuapp.com/api/detail/"
 const GET_RELETIVE_API = "https://glacial-journey-32972.herokuapp.com/api/reletive/";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 const savedUser = JSON.parse(localStorage.getItem('profile'));
-const username = savedUser.result.username;
+// const username = savedUser.result.username;
+const username = "jonwick"
 const USER_INFO_API = `https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`
 const USER_UPDATE_API = "https://glacial-journey-32972.herokuapp.com/api/users/"
 // savedUser.result._id
@@ -49,16 +51,18 @@ const Img = styled('img')({
 });
 
 let myGenre = [];
-
 let reletiveGenreId;
+
 // movieId
 export default function Detail() {
     const [movie, setMovie] = React.useState({});
+    const [user, setUser] = React.useState({})
     const [isLoaded, setIsLoaded] = React.useState(true);
     const [reletiveMovies, setReletiveMovies] = React.useState({});
+    const [favorited, setFavrited] = React.useState(false);
     const movieId = document.URL.split('/').pop();
     const singleMovieUrl = GET_DETAIL_API + movieId;
-
+    let favList = [];
     async function getMovieDetailAPT() {
         await axios.get(singleMovieUrl).then((Response) => {            
             const obj = Response.data.data;
@@ -85,17 +89,77 @@ export default function Detail() {
         }).then(Response => {
             const obj = Response.data.data;
             setReletiveMovies(obj);
+
+            // return axios.get(USER_INFO_API)
+        });
+        // .then(Response => {
+        //     const obj = Response.data.data[0];
+        //     console.log(obj)
+        //     const favList = obj.favList;
+        //     try {
+        //         if (favList.includes(movieId)){
+        //             favorited = true;
+        //             console.log("1")
+        //         }
+                
+        //     } catch (error) {
+        //         console.log("2")
+        //     }
+        //     console.log(favorited)
+        // });
+    }
+
+    async function getUserInfo() {
+        await axios.get(USER_INFO_API).then(Response => {
+            const obj = Response.data.data[0];
+            console.log(obj)
+            setUser(obj);
+            favList = obj.playList;
+            console.log(favList)
+            if (favList.includes(movieId)){
+                setFavrited(true);
+            }
         });
     }
 
+    async function updateUserInfo(username, favList) {
+        let data = {
+            username: user.username,
+            email: user.email,
+            playList: favList
+        };
+        // await axios.put(USER_UPDATE_API + username, {
+        //     "playList": favList
+        // }).then(Response => {
+        //     console.log(Response);
+        // });
+        await axios({
+            method: 'put',
+            url: USER_UPDATE_API + username,
+            data: data
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    
+    const handleOnclick = () => {
+        if (favorited) {
+            favList = favList.filter((item) => item !== movieId);
+            updateUserInfo(username, favList);
+            setFavrited(false);
+        } else {
+            favList.push(movieId);
+            setFavrited(true);
+        }
+    }
     useEffect(() => {
-        let isMounted = true;  
-        let flag = true;    // add flag
-        getMovieDetailAPT().then(data => {
-            if (isMounted) flag = false;    // add conditional check
-          })
-        return () => { isMounted = false };
-    }, [singleMovieUrl, reletiveGenreId]);
+        getMovieDetailAPT();
+        getUserInfo();
+
+    }, [singleMovieUrl, reletiveGenreId, favorited]);
 
     if (isLoaded) {
         return <div>Loading...</div>;
@@ -141,8 +205,9 @@ export default function Detail() {
                         <p>Rating: {movie.vote_average}</p>
                         <Rating name="read-only" value={Number(movie.vote_average)} precision={0.5} max={10} readOnly />
                         <p>Favorite: 
-                        <IconButton color="primary" aria-label="upload picture" component="label">
-                            <FavoriteBorderIcon></FavoriteBorderIcon>
+                        <IconButton color="primary" aria-label="upload picture" component="label" onClick={handleOnclick}>
+                            {favorited ? <FavoriteIcon></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}
+                            {/* <FavoriteBorderIcon></FavoriteBorderIcon> */}
                         </IconButton>
                         </p>
                     </div>
