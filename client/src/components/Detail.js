@@ -14,12 +14,12 @@ const GET_DETAIL_API = "https://glacial-journey-32972.herokuapp.com/api/detail/"
 const GET_RELETIVE_API = "https://glacial-journey-32972.herokuapp.com/api/reletive/";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 const savedUser = JSON.parse(localStorage.getItem('profile'));
-// const username = savedUser.result.username;
-const username = "jonwick"
+const username = savedUser === null ? null : savedUser.result.username;
+// const username = "jonwick"
 const USER_INFO_API = `https://glacial-journey-32972.herokuapp.com/api/users?where={"username": "${username}"}`
 const USER_UPDATE_API = "https://glacial-journey-32972.herokuapp.com/api/users/"
-// savedUser.result._id
-// 
+
+let favorited = false;
 const generalMap = new Map([
     [28, "Action"],
     [12, "Adventure"],
@@ -59,12 +59,12 @@ export default function Detail() {
     const [user, setUser] = React.useState({})
     const [isLoaded, setIsLoaded] = React.useState(true);
     const [reletiveMovies, setReletiveMovies] = React.useState({});
-    const [favorited, setFavrited] = React.useState(false);
+
     const movieId = document.URL.split('/').pop();
     const singleMovieUrl = GET_DETAIL_API + movieId;
     let favList = [];
     async function getMovieDetailAPT() {
-        await axios.get(singleMovieUrl).then((Response) => {            
+        await axios.get(singleMovieUrl).then((Response) => {
             const obj = Response.data.data;
             for (const key in obj) {
                 if (obj.hasOwnProperty(key)) {
@@ -74,10 +74,10 @@ export default function Detail() {
                             [...generalMap]
                                 .filter(([k, v]) => element.genre_ids.includes(k)
                                 ));
-                        myGenre =  Array.from(map1.values());
+                        myGenre = Array.from(map1.values());
                         reletiveGenreId = element.genre_ids[0];
                         setMovie(element);
-                        setIsLoaded(false); 
+                        setIsLoaded(false);
                     } catch (error) {
                         console.log(error);
                     }
@@ -89,76 +89,65 @@ export default function Detail() {
         }).then(Response => {
             const obj = Response.data.data;
             setReletiveMovies(obj);
-
-            // return axios.get(USER_INFO_API)
         });
-        // .then(Response => {
-        //     const obj = Response.data.data[0];
-        //     console.log(obj)
-        //     const favList = obj.favList;
-        //     try {
-        //         if (favList.includes(movieId)){
-        //             favorited = true;
-        //             console.log("1")
-        //         }
-                
-        //     } catch (error) {
-        //         console.log("2")
-        //     }
-        //     console.log(favorited)
-        // });
     }
 
     async function getUserInfo() {
         await axios.get(USER_INFO_API).then(Response => {
             const obj = Response.data.data[0];
-            console.log(obj)
             setUser(obj);
             favList = obj.playList;
-            console.log(favList)
-            if (favList.includes(movieId)){
-                setFavrited(true);
+            if (favList.includes(movieId)) {
+                favorited = true;
+            } else {
+                favorited = false;
             }
         });
     }
 
-    async function updateUserInfo(username, favList) {
+    async function updateUserInfo(favList) {
         let data = {
-            username: user.username,
-            email: user.email,
             playList: favList
         };
-        // await axios.put(USER_UPDATE_API + username, {
-        //     "playList": favList
-        // }).then(Response => {
-        //     console.log(Response);
-        // });
+
         await axios({
             method: 'put',
-            url: USER_UPDATE_API + username,
+            url: USER_UPDATE_API + user._id,
             data: data
         }).then(function (response) {
-            console.log(response);
-        }).catch(function (error) {
-            console.log(error);
+            window.location.reload();
         });
     }
 
-    
+
     const handleOnclick = () => {
-        if (favorited) {
-            favList = favList.filter((item) => item !== movieId);
-            updateUserInfo(username, favList);
-            setFavrited(false);
+        if (username !== undefined && username !== null) {
+            if (favorited) {
+                let data = user.playList;
+                data = user.playList.filter((item) => item !== movieId);
+                updateUserInfo(data);
+                favorited = false;
+    
+    
+            } else {
+                let data = user.playList;
+                data.push(movieId);
+                updateUserInfo(data);
+                favorited = true;
+            }
         } else {
-            favList.push(movieId);
-            setFavrited(true);
+            alert("Please login to use this feature");
         }
+
     }
     useEffect(() => {
         getMovieDetailAPT();
-        getUserInfo();
-
+        if (username !== undefined && username !== null) {
+            getUserInfo();
+            if (favList.includes(movieId)) {
+                favorited = true;
+            }
+        }
     }, [singleMovieUrl, reletiveGenreId, favorited]);
 
     if (isLoaded) {
@@ -204,11 +193,11 @@ export default function Detail() {
                     <div>
                         <p>Rating: {movie.vote_average}</p>
                         <Rating name="read-only" value={Number(movie.vote_average)} precision={0.5} max={10} readOnly />
-                        <p>Favorite: 
-                        <IconButton color="primary" aria-label="upload picture" component="label" onClick={handleOnclick}>
-                            {favorited ? <FavoriteIcon></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}
-                            {/* <FavoriteBorderIcon></FavoriteBorderIcon> */}
-                        </IconButton>
+                        <p>Favorite:
+                            <IconButton color="primary" aria-label="upload picture" component="label" onClick={handleOnclick}>
+                                {favorited ? <FavoriteIcon></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}
+                                {/* <FavoriteBorderIcon></FavoriteBorderIcon> */}
+                            </IconButton>
                         </p>
                     </div>
                 </Grid>
@@ -229,18 +218,18 @@ export default function Detail() {
                     <h1>Reletive Movies: </h1>
                 </Grid>
                 <Grid item sm container justifyContent="space-around" sx={{ height: 330 }}>
-                    {Array.isArray(reletiveMovies) ? 
-                        reletiveMovies.map((movie) => {
-                        return (
-                            <Grid item>
-                                <ButtonBase sx={{ width: 100, height: 230 }}>
-                                <a href={"/detail/" + movie._id}>
-                                    <Img alt="complex" src={IMG_API + movie.poster_path} key={movie.id}/>
-                                    </a>
-                                </ButtonBase>
-                            </Grid>
-                        )
-                    }): null}
+                    {Array.isArray(reletiveMovies) ?
+                        reletiveMovies.map((movie, index) => {
+                            return (
+                                <Grid item key={index}>
+                                    <ButtonBase sx={{ width: 100, height: 230 }}>
+                                        <a href={"/#/detail/" + movie._id}>
+                                            <Img alt="complex" src={IMG_API + movie.poster_path} key={movie.id} />
+                                        </a>
+                                    </ButtonBase>
+                                </Grid>
+                            )
+                        }) : null}
 
                 </Grid>
             </Grid>
