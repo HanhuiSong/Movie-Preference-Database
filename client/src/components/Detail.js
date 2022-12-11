@@ -127,8 +127,8 @@ export default function Detail() {
                 data = user.playList.filter((item) => item !== movieId);
                 updateUserInfo(data);
                 favorited = false;
-    
-    
+
+
             } else {
                 let data = user.playList;
                 data.push(movieId);
@@ -170,7 +170,7 @@ export default function Detail() {
                             <p>Title: {movie.title}</p>
                         </Grid>
                         <Grid item>
-                            <p>Genre: {myGenre.map(txt => <span>{txt}&nbsp;&nbsp;</span>)}</p>
+                            <p>Genre: {myGenre.map(txt => <span key={txt}>{txt}&nbsp;&nbsp;</span>)}</p>
                         </Grid>
                         <Grid item>
                             <p> Original Language: {movie.original_language}</p>

@@ -43,6 +43,7 @@ const Header = () => {
                     </Typography>
 
                     <Button href={"/search"}>Search</Button>
+
                     {user?.result ? (
                         <div className='profile'>
                             <Link to={"/user/" + user?.result.username}>
@@ -54,7 +55,7 @@ const Header = () => {
                             <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
                         </div>
                     ) : (
-                        <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                        <Button variant="contained" color="primary" href={"/auth"}>Log In</Button>
                     )}
                 </Toolbar>
             </AppBar>
