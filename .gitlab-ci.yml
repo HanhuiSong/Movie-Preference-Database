@@ -1,8 +1,5 @@
 image: node:latest
 
-variables:
-  PUBLIC_URL: /
-
 cache:
   paths:
   - node_modules
