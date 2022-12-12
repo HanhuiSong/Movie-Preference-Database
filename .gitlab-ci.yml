@@ -1,5 +1,8 @@
 image: node:latest
 
+variables:
+  PUBLIC_URL: /movie-database-final-project
+
 cache:
   paths:
   - node_modules
