@@ -26,7 +26,7 @@ const GalleryItem = ({id, poster, title, date, media_type, vote_average}) => {
     // );
     return (
         <Card sx={{ m:2, width: 250}} variant = "cotained" style={{backgroundColor: "#202020"}}>
-          <CardActionArea href={"/detail/" + id}>
+          <CardActionArea href={"/#/detail/" + id}>
             <CardMedia
               component="img"
               height="330"

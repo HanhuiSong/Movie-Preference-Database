@@ -1,7 +1,7 @@
 import "./Header.css";
 import React, { useState, useEffect } from 'react';
 import { AppBar, Box, Toolbar, Typography, Button, Avatar } from '@mui/material';
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionsTypes';
@@ -10,11 +10,10 @@ const Header = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const location = useLocation();
-    const history = useHistory();
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
-        history.push('/auth');
+        window.location.href = window.location.href.split('/#')[0];
         setUser(null);
     };
 
@@ -38,7 +37,7 @@ const Header = () => {
                         <Button href={"/"}>Interactive Movie DB</Button>
                     </Typography>
 
-                    <Button href={"/search"}>Search</Button>
+                    <Button href={"/#/search"}>Search</Button>
 
                     {user?.result ? (
                         <div className='profile'>
@@ -53,13 +52,12 @@ const Header = () => {
                                 className='logout'
                                 color="secondary"
                                 onClick={logout}
-                                href={"/auth"}
                             >
                                 Logout
                             </Button>
                         </div>
                     ) : (
-                        <Button variant="contained" color="secondary" href={"/auth"}>Log In</Button>
+                        <Button variant="contained" color="secondary" href={"/#/auth"}>Log In</Button>
                     )}
                 </Toolbar>
             </AppBar>

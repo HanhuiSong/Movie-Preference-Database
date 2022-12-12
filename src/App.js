@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import Home from "./Home";
 import Search from "./Search";
 import User from "./components/User/index";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Auth from './components/Authentication/Auth';
 import Detail from "./components/Detail";

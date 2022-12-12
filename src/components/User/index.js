@@ -53,7 +53,7 @@ function User() {
             url: `https://intense-bastion-25012.herokuapp.com/api/users/${user._id}`
         }).then(() => {
             dispatch({ type: actionType.LOGOUT });
-            window.location.href = window.location.href.split('/user')[0]
+            window.location.href = window.location.href.split('/#')[0]
         }).catch((error) => {
             console.log(error);
         })
