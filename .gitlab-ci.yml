@@ -14,7 +14,6 @@ pages:
   stage: deploy
 
   script:
-    - cd client
     - npm install       # Install all dependencies
     - npm run build      # Build for prod
     - mv public _public  # CRA and gitlab pages both use the public folder. Only do this in a build pipeline.
