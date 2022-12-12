@@ -26,6 +26,7 @@ export default function GalleryView() {
     }
     useEffect(() => {
         getSearchResults();
+        // eslint-disable-next-line
     }, [name]);
 
 

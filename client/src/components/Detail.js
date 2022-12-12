@@ -148,6 +148,7 @@ export default function Detail() {
                 favorited = true;
             }
         }
+        // eslint-disable-next-line
     }, [singleMovieUrl, reletiveGenreId, favorited]);
 
     if (isLoaded) {
