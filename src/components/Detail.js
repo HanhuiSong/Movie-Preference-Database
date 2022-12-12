@@ -180,7 +180,7 @@ export default function Detail() {
                             <p>Adult: {movie.adult ? "True" : "False"}</p>
                         </Grid>
                         <Grid item>
-                            <p>Release Date: {movie.release_date}</p>
+                            <p>Release Date: {movie.release_date.toDateString().split(' ').slice(1).join(' ')}</p>
                         </Grid>
                         <Grid item>
                             <p>Popularity: {movie.popularity}</p>
