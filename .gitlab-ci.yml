@@ -1,7 +1,7 @@
 image: node:latest
 
 variables:
-  PUBLIC_URL: /mp2
+  PUBLIC_URL: /movie-database-final-project
 
 cache:
   paths:
@@ -14,6 +14,7 @@ pages:
   stage: deploy
 
   script:
+    - cd client
     - npm install       # Install all dependencies
     - npm run build      # Build for prod
     - mv public _public  # CRA and gitlab pages both use the public folder. Only do this in a build pipeline.
@@ -24,4 +25,4 @@ pages:
     - public
 
   only:
-    - main
+    - master
