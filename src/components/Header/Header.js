@@ -34,7 +34,7 @@ const Header = () => {
                 <Toolbar>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-                        <Button href={"/"}>Interactive Movie DB</Button>
+                        <Button href={"/movie-database-final-project/"}>Interactive Movie DB</Button>
                     </Typography>
 
                     <Button href={"/movie-database-final-project/#/search"}>Search</Button>
