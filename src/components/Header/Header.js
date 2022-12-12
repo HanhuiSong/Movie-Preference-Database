@@ -34,10 +34,10 @@ const Header = () => {
                 <Toolbar>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-                        <Button href={"/movie-database-final-project/"}>Interactive Movie DB</Button>
+                        <Button id='title' href={"/movie-database-final-project/"}>Movie Preference Database</Button>
                     </Typography>
 
-                    <Button href={"/movie-database-final-project/#/search"}>Search</Button>
+                    <Button id='title1' href={"/movie-database-final-project/#/search"}>Search</Button>
 
                     {user?.result ? (
                         <div className='profile'>

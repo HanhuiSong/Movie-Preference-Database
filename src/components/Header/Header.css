@@ -13,6 +13,12 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
+#title {
+  color: rgb(187, 119, 30);
+}
+#title1 {
+  color: rgb(187, 119, 30);
+}
 
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
