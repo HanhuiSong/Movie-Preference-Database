@@ -224,7 +224,7 @@ export default function Detail() {
                             return (
                                 <Grid item key={index}>
                                     <ButtonBase sx={{ width: 100, height: 230 }}>
-                                        <a href={"/#/detail/" + movie._id}>
+                                        <a href={"/movie-database-final-project/#/detail/" + movie._id}>
                                             <Img alt="complex" src={IMG_API + movie.poster_path} key={movie.id} />
                                         </a>
                                     </ButtonBase>

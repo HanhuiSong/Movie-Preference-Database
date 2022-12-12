@@ -37,7 +37,7 @@ const Header = () => {
                         <Button href={"/"}>Interactive Movie DB</Button>
                     </Typography>
 
-                    <Button href={"/#/search"}>Search</Button>
+                    <Button href={"/movie-database-final-project/#/search"}>Search</Button>
 
                     {user?.result ? (
                         <div className='profile'>
@@ -57,7 +57,7 @@ const Header = () => {
                             </Button>
                         </div>
                     ) : (
-                        <Button variant="contained" color="secondary" href={"/#/auth"}>Log In</Button>
+                        <Button variant="contained" color="secondary" href={"/movie-database-final-project/#/auth"}>Log In</Button>
                     )}
                 </Toolbar>
             </AppBar>
