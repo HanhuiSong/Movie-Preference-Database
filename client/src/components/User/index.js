@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import './styles.css';
 import Carousel from "./Carousel";
 import axios from "axios";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Button} from '@material-ui/core';
 import {useDispatch} from "react-redux";
 import * as actionType from '../../constants/actionsTypes';
@@ -22,16 +22,15 @@ function User() {
     const [user, setUser] = useState({});
     const [movies, setMovies] = useState([]);
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const getUser = async () => {
         try {
             await axios.get(`https://intense-bastion-25012.herokuapp.com/api/users?where={"username": "${username}"}`)
                 .then((response) => {
-                const obj = response.data.data[0];
-                setUser(obj);
-                watchlist = obj.playList;
-            })
+                    const obj = response.data.data[0];
+                    setUser(obj);
+                    watchlist = obj.playList;
+                })
                 .then(() => {
                     for (let movieId of watchlist) {
                         axios.get(`https://intense-bastion-25012.herokuapp.com/api/detail/${movieId}`)
@@ -54,7 +53,7 @@ function User() {
             url: `https://intense-bastion-25012.herokuapp.com/api/users/${user._id}`
         }).then(() => {
             dispatch({ type: actionType.LOGOUT });
-            history.go('/');
+            window.location.href = window.location.href.split('/user')[0]
         }).catch((error) => {
             console.log(error);
         })

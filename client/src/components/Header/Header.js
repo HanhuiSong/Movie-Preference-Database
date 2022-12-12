@@ -14,7 +14,7 @@ const Header = () => {
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
-        history.go('/auth');
+        history.push('/auth');
         setUser(null);
     };
 
@@ -48,7 +48,15 @@ const Header = () => {
                                 </Avatar>
                             </Link>
                             <Typography className='username' variant="h6">{user?.result.name}</Typography>
-                            <Button variant="contained" className='logout' color="secondary" onClick={logout}>Logout</Button>
+                            <Button
+                                variant="contained"
+                                className='logout'
+                                color="secondary"
+                                onClick={logout}
+                                href={"/auth"}
+                            >
+                                Logout
+                            </Button>
                         </div>
                     ) : (
                         <Button variant="contained" color="secondary" href={"/auth"}>Log In</Button>
