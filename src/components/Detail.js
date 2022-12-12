@@ -52,7 +52,7 @@ const Img = styled('img')({
 
 let myGenre = [];
 let reletiveGenreId;
-
+let date;
 // movieId
 export default function Detail() {
     const [movie, setMovie] = React.useState({});
@@ -76,6 +76,7 @@ export default function Detail() {
                                 ));
                         myGenre = Array.from(map1.values());
                         reletiveGenreId = element.genre_ids[0];
+                        date = new Date(element.release_date).toDateString().split(' ').slice(1).join(' ');
                         setMovie(element);
                         setIsLoaded(false);
                     } catch (error) {
@@ -180,7 +181,7 @@ export default function Detail() {
                             <p>Adult: {movie.adult ? "True" : "False"}</p>
                         </Grid>
                         <Grid item>
-                            <p>Release Date: {movie.release_date.toDateString().split(' ').slice(1).join(' ')}</p>
+                            <p>Release Date: {date}</p>
                         </Grid>
                         <Grid item>
                             <p>Popularity: {movie.popularity}</p>
