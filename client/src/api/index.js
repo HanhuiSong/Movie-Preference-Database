@@ -9,5 +9,11 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const signIn = (formData) => API.post('/api/signin', formData);
+export const signIn = (formData) => API.post('/api/signin', formData)
+                                          .then(async (res) => {
+                                              return res;
+                                            })
+                                            .catch((err) => {
+                                              return window.alert('Invalid credentials, check your Email or Password');
+                                            });
 export const signUp = (formData) => API.post('/api/signup', formData);
